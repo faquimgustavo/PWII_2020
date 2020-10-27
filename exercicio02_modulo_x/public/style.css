@@ -1,0 +1,39 @@
+body{
+  background-color: #23272B !important;
+}
+.container{
+  border: 1px solid black;
+}
+
+.container .row {
+  text-align: center;
+  padding: 10px;
+  font-size: 20pt;
+  border: 1px solid red;
+  margin: auto;
+}
+
+
+.container .row a{
+  text-decoration: none;
+  color: #ffffff !important;
+}
+
+.form-inline{
+  display: block !important;
+}
+
+.form-group label {
+  color: #ffffff;
+}
+
+.form-group{
+  text-align: center;
+}
+
+.container .table{
+  margin-top: 80px;
+}
+.tabela table{
+  color: #ffffff !important;
+}
