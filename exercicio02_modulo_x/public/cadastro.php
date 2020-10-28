@@ -17,12 +17,9 @@ $atleta = new Atleta($_POST['nome'], $_POST['idade'], $_POST['altura'], $_POST['
 
 #print_r($atleta);
 
-$atletaDAO->inseir($atleta);
+$atletaDAO->inserir($atleta);
 
 header('Location: index.php');
 
-echo "<pre>";
-print_r($atleta);
-echo "</pre>";
 
 ?>

@@ -25,19 +25,6 @@
   ?>
 
     <div class="container">
-
-      <div class="row">
-        <div class="col-12 col-md-12">
-          <button class="btn btn-dark"><a href="form-cadastro.php">Cadastrar atleta</a></button>
-        </div>
-      </div>
-      
-      <div class="row">
-        <div class="col-12 col-md-12">
-          <button class="btn btn-dark"><a href="">Deletar atleta</a></button>
-        </div>
-      </div>
-
       <div class="row">
         <div class="col-12 col-md-12">
           <form class="form-inline my-lg-1" action="index.php" method="post">
@@ -46,64 +33,97 @@
           </form>
         </div>
       </div>
-    
+
+      <div class="row">
+          <div class="col-12 col-md-12">
+            <form action="index.php" method='post'>
+              <input type="submit" class="btn btn-dark" value='Cadastrar novo atleta' name='cadastrar'>
+            </form>
+          </div>
+      </div>
+
     </div>
 
-    <div class="container tabela">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Idade</th>
-            <th scope="col">Altura</th>
-            <th scope="col">Peso</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
             <?php 
-              $atletas = $atletaDAO->listarTudo();
-              #print_r($atletas);
-              $cont = 0;
-              $x = 0;
-              /*foreach($atletas as $atleta){
-                foreach($atleta as $key => $valor){
-                  
-                  if($cont == 3 || $cont == 0){
-                    echo "<td>";
-                  }
-                  echo $valor;
-                  #echo "<b> X = ".$x." - CONT = ".$cont."</b>";
 
-                  if($x == 3 || $x == 0){
-                    echo "</td>";
-                    $cont = 0;
-                    $x == 0;
-                  }
-                  $x++;
-                  $cont ++;
-                }
+            if(isset($_POST['nome'])){
+              $nome = $_POST['nome'];
+              $atletas = $atletaDAO->pesquisarNome($_POST['nome']);
+
+              echo "<div class='container tabela'>";
+              echo " <table class='table table-striped table-dark' >";
+              echo "<thead>";
+              echo "<th scope='col'>Nome</th> <th scope='col'>Idade</th> <th scope='col'>Altura</th> <th scope='col'>Peso</th> <th scope='col'>Apagar</th> </tr> </thead> <tbody> <tr>";
+              echo "";
+              echo "";
+              echo "";
+              
+              foreach($atletas as $atleta){
+                echo "<tr><td>".$atleta->__get("nome");
+                echo "<td>".$atleta->__get("idade");
+                echo "<td>".$atleta->__get("altura");
+                echo "<td>".$atleta->__get("peso");
+                echo "<form action='deletar.php' method='post'>";
+                #echo "<td>".$atleta->__get('id');
+                echo "<td> <input type='checkbox' name='lista_apagar[]' value='".$atleta->__get('id')."'>";
                 
                 
-              } */
-             foreach($atletas as $atleta){
-                $aux = array();
-                echo "<td>";
-                foreach($atleta as $key => $valor){
-                  echo $valor;
-                  
-                }
-                echo "</td>";
              }
+            }
+            else if(isset($_POST['cadastrar'])){
+              echo"<div class='container'>
 
-
+              <form class='' action='cadastro.php' method='post'>
+                <div class='row'>
+        
+                  <div class='form-group col-12 col-md-7'>
+                    <label for='nome'>Nome</label>
+                    <input type='text' class='form-control' id='nome' name='nome' placeholder='Nome'>
+                  </div>
+        
+                  <div class='form-group col-12 col-md-1'>
+                    <label for='idade'>Idade</label>
+                    <input type='number' class='form-control' id='idade' name='idade' placeholder='18'>
+                  </div>
+        
+                  <div class='form-group col-12 col-md-2'>
+                    <label for='peso'>Peso</label>
+                    <input type='number' step='0.010' class='form-control' id='peso' name='peso' placeholder='18'>
+                  </div>
+        
+                  <div class='form-group col-12 col-md-2'>
+                    <label for='altura'>Altura</label>
+                    <input type='number' step='0.010' class='form-control' id='altura' name='altura' placeholder='1.80'>
+                  </div>
+        
+                  
+                  <input type='submit' class='btn btn-dark' value='Salvar'>
+                  
+                  
+                </div>
+              </form>
+        
+            </div>";
+            }
+            
+            
              
             ?>
           </tr>
         </tbody>
       </table>
       
-    </div>
+      <div class="container">
+            <?php
+              echo "<input type='submit' value='Deletar atleta(s)' nome='deletar' class='btn btn-dark'>";
+              echo "</form>";
+            ?>
+            
+          </div>
+        </div>
+      </div>
+
+
+
   </body>
 </html>

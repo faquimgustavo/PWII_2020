@@ -1,6 +1,7 @@
 <?php 
 
 class Atleta{
+  public $id;
   public $nome;
   public $idade;
   public $altura;

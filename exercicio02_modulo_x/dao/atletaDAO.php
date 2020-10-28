@@ -10,7 +10,7 @@ class AtletaDAO{
     $this->conexao = $conexao->conectar();
   }
 
-  public function inseir(Atleta $atleta){
+  public function inserir(Atleta $atleta){
     $sql = 'insert into atleta (nome,idade,altura,peso) values (:nome, :idade, :altura, :peso)';
     $stmt = $this->conexao->prepare($sql);
     $stmt->BindValue(":nome", $atleta->__get('nome'));
@@ -23,8 +23,7 @@ class AtletaDAO{
   public function pesquisarNome($nome){
     $sql = "select * from atleta where nome like :nome";
     $stmt = $this->conexao->prepare($sql);
-    $stmt->BindValue(':nome', "'%".$nome."%'");
-    print_r($stmt);
+    $stmt->BindValue(':nome', '%'.$nome.'%');
     $stmt->execute();
 
     if($stmt->execute() == False){
@@ -34,13 +33,12 @@ class AtletaDAO{
     }
 
     $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);
-    print_r($resultado);
     $atletas = array();
     
 
     foreach($resultado as $id => $objeto){
-      print_r($resultado->nome);
       $atleta = new Atleta($objeto->nome, $objeto->idade, $objeto->altura, $objeto->peso);
+      $atleta->__set('id',$objeto->id);
       $atletas[] = $atleta;
     }
     return $atletas;

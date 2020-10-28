@@ -13,6 +13,7 @@ create table atleta(
 
 insert into atleta (nome, idade, altura, peso) values ('Ciclano', 25, 1.98, 89.6);
 insert into atleta (nome, idade, altura, peso) values ('Fulana', 22, 1.70, 78.6);
+
 select * from atleta;
 
 select * from atleta where nome like  '%Ful%';
