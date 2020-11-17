@@ -42,3 +42,5 @@ select * from atleta;
 select * from treinador;
 select * from time;
 select * from atletaTime;
+select * from atletaTime where idTime =1;
+select * from time where nome like '%Ti%';

@@ -99,10 +99,10 @@ foreach($treinador as $id => $objeto){
 }
 
 
-echo "<h3>Lista de todos os treinadores</h3>";
+echo "<hr><h3>Lista de todos os treinadores</h3>";
 $treinador = $treinadorDAO->listarTudo();
 foreach($treinador as $id => $objeto){
-  echo("<br><br> Nome: ".$objeto->__get('nome'));
+  echo("Nome: ".$objeto->__get('nome'));
   echo("<br> Salario: ".$objeto->__get('salario'));
   echo("<br> Vitoria: ".$objeto->__get('qntVitoria'));
   echo("<br> Salario: ".$objeto->__get('bonusSalario'));
@@ -117,8 +117,49 @@ $time->__set("qntVitoria",4);
 $time->__set("anoFundacao",2015);
 
 
-$timeDAO->salvar($time);
+#$timeDAO->salvar($time);
 
 
+echo "<hr><h3>Pesquisar Time por ID</h3>";
+$time = $timeDAO->pesquisarId(25);
+echo "Nome: ", $time->__get('nome');
+echo "<br> Vitorias: ", $time->__get('qntVitoria');
+echo "<br> Cidade: ", $time->__get('cidade');
+echo "<br> Fundacao: ", $time->__get('anoFundacao');
+echo "<br> Treinador: ", $time->__get("treinador")->__get('nome');
+foreach($time->__get('atletas') as $id => $atletas){
+  echo "<br> Atletas: ", $atletas->__get('nome');
+}
+
+echo "<h3>Pesquisar Time por Nome</h3>";
+
+$times = $timeDAO->pesquisarNome("Tim");
+foreach($times as $id => $objeto){
+  echo "<hr>";
+  echo "Nome:", $objeto->__get('nome');
+  echo "<br> Vitorias: ", $time->__get('qntVitoria');
+  echo "<br> Cidade: ", $time->__get('cidade');
+  echo "<br> Fundacao: ", $time->__get('anoFundacao');
+  echo "<br> Treinador: ", $time->__get("treinador")->__get('nome');
+  foreach($time->__get('atletas') as $id => $atletas){
+    echo "<br> Atletas: ", $atletas->__get('nome');
+  }
+  
+}
+
+echo "<h3>Listar todos os times</h3>";
+$times = $timeDAO->listarTudo();
+foreach($times as $id => $objeto){
+  echo "<hr>";
+  echo "Nome:", $objeto->__get('nome');
+  echo "<br> Vitorias: ", $time->__get('qntVitoria');
+  echo "<br> Cidade: ", $time->__get('cidade');
+  echo "<br> Fundacao: ", $time->__get('anoFundacao');
+  echo "<br> Treinador: ", $time->__get("treinador")->__get('nome');
+  foreach($time->__get('atletas') as $id => $atletas){
+    echo "<br> Atletas: ", $atletas->__get('nome');
+  }
+  
+}
 
 ?>
